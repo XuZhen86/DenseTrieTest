@@ -1,11 +1,9 @@
+#include<fstream>
 #include<iostream>
 #include<map>
-#include<vector>
-#include<string>
-#include<fstream>
-#include<cstdlib>
-#include<chrono>
 #include<random>
+#include<string>
+#include<vector>
 using namespace std;
 
 #include<../DenseTrie/densetrie.h>
@@ -44,7 +42,7 @@ int main(int argc,char *argv[]){
 
         words.push_back(str);
         wordsMap[str]=true;
-        d.insert(str.c_str());
+        d.insert(str);
     }
     f.close();
     cout<<"Finished inserting words, clock()="<<clock()<<", elapsed="<<(clock()-startClock)<<endl;
@@ -61,17 +59,17 @@ int main(int argc,char *argv[]){
 
         switch(randDev()%3){
             case 0: // Test validity
-                if(wordsMap[str]!=d.contains(str.c_str())){
-                    cout<<"Error: str="<<str<<" wordsMap="<<wordsMap[str]<<" d.contains()="<<d.contains(str.c_str())<<endl;
+                if(wordsMap[str]!=d.contains(str)){
+                    cout<<"Error: str="<<str<<" wordsMap="<<wordsMap[str]<<" d.contains()="<<d.contains(str)<<endl;
                 }
                 break;
             case 1: // Disable
                 wordsMap[str]=false;
-                d.disable(str.c_str());
+                d.disable(str);
                 break;
             case 2: // Enable
                 wordsMap[str]=true;
-                d.enable(str.c_str());
+                d.enable(str);
                 break;
         }
     }
